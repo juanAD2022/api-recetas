@@ -21,8 +21,14 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'H
 
 const HomeScreen: React.FC = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
-  const [categories, setCategories] = useState<Meal[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [popularMeals, setPopularMeals] = useState<Meal[]>([]);
+// categories=[];
+// <div>categories</div> none []
+// setCategories([1,2,3]);
+// useState
+// <div>categories</div> [1,2,3]
+
 
   interface Category {
     idCategory: string;
@@ -50,12 +56,12 @@ const HomeScreen: React.FC = () => {
 
   useEffect(() => {
     loadData();
-  }, []);
-
+  }, []); 
+ 
   const loadData = async () => {
     try {
       // Cargar categorías
-      const categoryResponse = await api.getMealsByCategory('Seafood');
+      const categoryResponse = await api.getMealsByCategory();
       setCategories(categoryResponse.data.meals.slice(0, 3));
       
       // Cargar comidas populares
@@ -66,18 +72,7 @@ const HomeScreen: React.FC = () => {
     }
   };
 
-  const renderCategoryItem = ({ item }: { item: Meal }) => (
-    <TouchableOpacity 
-      style={styles.categoryItem}
-      onPress={() => navigation.navigate('MealDetail', { mealId: item.idMeal })}
-    >
-      <Image source={{ uri: item.strMealThumb }} style={styles.categoryImage} />
-      <Text style={styles.categoryText}>{item.strMeal}</Text>
-    </TouchableOpacity>
-
-  );
-
-  const renderCategoryItemTest = ({ item }: { item: Category }) => (
+  const renderCategoryItem = ({ item }: { item: Category }) => (
     <TouchableOpacity
       style={styles.categoryItem}
       onPress={() => navigation.navigate('MealDetail', { mealId: item.idCategory })}
@@ -95,17 +90,10 @@ const HomeScreen: React.FC = () => {
   
       <ScrollView>
         <Text style={styles.sectionTitleFirst}>CATEGORIAS</Text>
+
         <FlatList
-          data={categories}
+          data={categories} 
           renderItem={renderCategoryItem}
-          keyExtractor={item => item.idMeal}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.categoryList}
-        />
-        <FlatList
-          data={category} 
-          renderItem={renderCategoryItemTest}
           keyExtractor={item => item.idCategory} 
           horizontal
           showsHorizontalScrollIndicator={false}

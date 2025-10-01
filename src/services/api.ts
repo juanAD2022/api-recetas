@@ -4,8 +4,9 @@ const API_BASE_URL = 'https://www.themealdb.com/api/json/v1/1';
 
 export const api = {
   // Obtener comidas por categoría
-  getMealsByCategory: (category: string) => 
-    axios.get(`${API_BASE_URL}/filter.php?c=${category}`),
+  //https://www.themealdb.com/api/json/v1/1/categories.php
+  getMealsByCategory: () => 
+    axios.get(`${API_BASE_URL}/categories.php`),
   
   // Obtener todas las comidas
   getAllMeals: () => 
