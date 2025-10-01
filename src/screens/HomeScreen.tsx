@@ -24,29 +24,29 @@ const HomeScreen: React.FC = () => {
   const [categories, setCategories] = useState<Meal[]>([]);
   const [popularMeals, setPopularMeals] = useState<Meal[]>([]);
 
-interface Category {
-  idCategory: string;
-  strCategory: string;
-  strCategoryThumb: string;
-}
+  interface Category {
+    idCategory: string;
+    strCategory: string;
+    strCategoryThumb: string;
+  }
 
-    const category: Category[] = [
-      {
-        idCategory: "1",
-        strCategory: "Beef",
-        strCategoryThumb: "https://www.themealdb.com/images/category/beef.png",
-      },
-      {
-        idCategory: "2",
-        strCategory: "Chicken",
-        strCategoryThumb: "https://www.themealdb.com/images/category/chicken.png",
-      },
-      {
-        idCategory: "3",
-        strCategory: "Dessert",
-        strCategoryThumb: "https://www.themealdb.com/images/category/dessert.png",
-      },
-    ];
+  const category: Category[] = [
+    {
+      idCategory: "1",
+      strCategory: "Beef",
+      strCategoryThumb: "https://www.themealdb.com/images/category/beef.png",
+    },
+    {
+      idCategory: "2",
+      strCategory: "Chicken",
+      strCategoryThumb: "https://www.themealdb.com/images/category/chicken.png",
+    },
+    {
+      idCategory: "3",
+      strCategory: "Dessert",
+      strCategoryThumb: "https://www.themealdb.com/images/category/dessert.png",
+    },
+  ];
 
   useEffect(() => {
     loadData();
@@ -74,9 +74,21 @@ interface Category {
       <Image source={{ uri: item.strMealThumb }} style={styles.categoryImage} />
       <Text style={styles.categoryText}>{item.strMeal}</Text>
     </TouchableOpacity>
+
   );
 
-
+  const renderCategoryItemTest = ({ item }: { item: Category }) => (
+    <TouchableOpacity
+      style={styles.categoryItem}
+      onPress={() => navigation.navigate('MealDetail', { mealId: item.idCategory })}
+    >
+      <Image 
+        source={{ uri: item.strCategoryThumb }} 
+        style={styles.categoryImage} 
+      />
+      <Text style={styles.categoryText}>{item.strCategory}</Text>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
@@ -91,10 +103,19 @@ interface Category {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categoryList}
         />
+        <FlatList
+          data={category} 
+          renderItem={renderCategoryItemTest}
+          keyExtractor={item => item.idCategory} 
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.categoryList}
+        />
+
 
         <Text style={styles.sectionTitle}>LOS MAS POPULARES</Text>
         <View style={styles.popularGrid}>
-          {/* {popularMeals.map((item) => (
+          {popularMeals.map((item) => (
             <TouchableOpacity 
               key={item.idMeal} 
               style={styles.popularGridItem}
@@ -103,18 +124,16 @@ interface Category {
               <Image source={{ uri: item.strMealThumb }} style={styles.popularGridImage} />
               <Text style={styles.popularGridText}>{item.strMeal}</Text>
             </TouchableOpacity>
-          ))} */}
-          
-        {category.map((cat) => (
-        <CategoryCard
-          key={cat.idCategory}
-          image={cat.strCategoryThumb}
-          text={cat.strCategory}
-        />
-      ))}
+          ))}
           
         </View>
-
+        {/* {category.map((cat) => (
+          <CategoryCard
+            key={cat.idCategory}
+            image={cat.strCategoryThumb}
+            text={cat.strCategory}
+          />
+        ))} */}
 
       </ScrollView>
     </SafeAreaView>
