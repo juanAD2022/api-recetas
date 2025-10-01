@@ -94,7 +94,7 @@ interface Category {
 
         <Text style={styles.sectionTitle}>LOS MAS POPULARES</Text>
         <View style={styles.popularGrid}>
-          {popularMeals.map((item) => (
+          {/* {popularMeals.map((item) => (
             <TouchableOpacity 
               key={item.idMeal} 
               style={styles.popularGridItem}
@@ -103,9 +103,8 @@ interface Category {
               <Image source={{ uri: item.strMealThumb }} style={styles.popularGridImage} />
               <Text style={styles.popularGridText}>{item.strMeal}</Text>
             </TouchableOpacity>
-          ))}
-        </View>
-
+          ))} */}
+          
         {category.map((cat) => (
         <CategoryCard
           key={cat.idCategory}
@@ -113,6 +112,9 @@ interface Category {
           text={cat.strCategory}
         />
       ))}
+          
+        </View>
+
 
       </ScrollView>
     </SafeAreaView>
