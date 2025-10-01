@@ -166,4 +166,29 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
     color: '#007AFF',
   },
+
+  mealsList: {
+  paddingHorizontal: 12,
+  paddingBottom: 20,
+},
+  mealItem: {
+    flex: 1,
+    margin: 8,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    overflow: 'hidden',
+    alignItems: 'center',
+    elevation: 2, // sombra en Android
+  },
+  mealImage: {
+    width: '100%',
+    height: 120,
+  },
+  mealText: {
+    marginVertical: 8,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
 });

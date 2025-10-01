@@ -56,6 +56,7 @@ export type Ingredient = {
 export type RootStackParamList = {
   Home: undefined;
   MealDetail: { mealId: string };
+  MealCategoty: { mealId: string };
 };
 
 // Para usar con useNavigation

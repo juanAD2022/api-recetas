@@ -20,6 +20,11 @@ import { CategoryCard } from '../components';
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
+  interface Category {
+    idCategory: string;
+    strCategory: string;
+    strCategoryThumb: string;
+  }
   const navigation = useNavigation<HomeScreenNavigationProp>();
   const [categories, setCategories] = useState<Category[]>([]);
   const [popularMeals, setPopularMeals] = useState<Meal[]>([]);
@@ -29,31 +34,6 @@ const HomeScreen: React.FC = () => {
 // useState
 // <div>categories</div> [1,2,3]
 
-
-  interface Category {
-    idCategory: string;
-    strCategory: string;
-    strCategoryThumb: string;
-  }
-
-  const category: Category[] = [
-    {
-      idCategory: "1",
-      strCategory: "Beef",
-      strCategoryThumb: "https://www.themealdb.com/images/category/beef.png",
-    },
-    {
-      idCategory: "2",
-      strCategory: "Chicken",
-      strCategoryThumb: "https://www.themealdb.com/images/category/chicken.png",
-    },
-    {
-      idCategory: "3",
-      strCategory: "Dessert",
-      strCategoryThumb: "https://www.themealdb.com/images/category/dessert.png",
-    },
-  ];
-
   useEffect(() => {
     loadData();
   }, []); 
@@ -62,7 +42,7 @@ const HomeScreen: React.FC = () => {
     try {
       // Cargar categorías
       const categoryResponse = await api.getMealsByCategory();
-      setCategories(categoryResponse.data.meals.slice(0, 3));
+      setCategories(categoryResponse.data.categories.slice(0,3));
       
       // Cargar comidas populares
       const popularResponse = await api.getAllMeals();
@@ -75,7 +55,7 @@ const HomeScreen: React.FC = () => {
   const renderCategoryItem = ({ item }: { item: Category }) => (
     <TouchableOpacity
       style={styles.categoryItem}
-      onPress={() => navigation.navigate('MealDetail', { mealId: item.idCategory })}
+      onPress={() => navigation.navigate('MealCategoty', { mealId: item.idCategory })}
     >
       <Image 
         source={{ uri: item.strCategoryThumb }} 
