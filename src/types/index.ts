@@ -2,6 +2,7 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type Meal = {
   idMeal: string;
+  categoryName: string;
   strMeal: string;
   strMealThumb: string;
   strInstructions?: string;
@@ -56,7 +57,7 @@ export type Ingredient = {
 export type RootStackParamList = {
   Home: undefined;
   MealDetail: { mealId: string };
-  MealCategoty: { mealId: string };
+  MealCategoty: { categoryName: string };
 };
 
 // Para usar con useNavigation

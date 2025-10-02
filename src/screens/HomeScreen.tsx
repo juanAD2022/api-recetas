@@ -55,7 +55,7 @@ const HomeScreen: React.FC = () => {
   const renderCategoryItem = ({ item }: { item: Category }) => (
     <TouchableOpacity
       style={styles.categoryItem}
-      onPress={() => navigation.navigate('MealCategoty', { mealId: item.idCategory })}
+      onPress={() => navigation.navigate('MealCategoty', { categoryName: item.strCategory })}
     >
       <Image 
         source={{ uri: item.strCategoryThumb }} 

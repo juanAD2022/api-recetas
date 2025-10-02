@@ -9,6 +9,7 @@ export const api = {
   getMealsByCategory: () => 
     axios.get(`${API_BASE_URL}/categories.php`),
   //https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef
+  //https://www.themealdb.com/api/json/v1/1/filter.php?c=Chicken
   getMealsByCategoryName: (category: string) => 
     axios.get(`${API_BASE_URL}/filter.php?c=${category}`),
   
